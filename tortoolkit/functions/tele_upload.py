@@ -518,9 +518,11 @@ async def upload_single_file(
             mime = metadata.get("Common").get("MIME type")
         except:
             mime = metadata.get("Metadata").get("MIME type")
-
-        ftype = mime.split("/")[0]
-        ftype = ftype.lower().strip()
+        if mime is not None:
+            ftype = mime.split("/")[0]
+            ftype = ftype.lower().strip()
+        else:
+            ftype = "unknown"
     else:
         ftype = "unknown"
 
