@@ -140,6 +140,20 @@ async def extract_archive(path, password=""):
 
                 out, err, rcode = await cli_call(cmd)
 
+                extpath1 = extpath;
+                path1 = os.path.join(extpath,"Applied AI.zip.zip.001")
+                if os.path.exists(path1):
+                    extpath1 = os.path.join(userpath, str(time.time()).replace(".", ""))
+                    os.mkdir(extpath1)
+                    cmd = f'7z x -y "{path1}" "-o{extpath1}" "-p{password}"'
+                    out1, err1, rcode1 = await cli_call(cmd)
+
+                    if err1:
+                        torlog.error(err1)
+                        torlog.error(out1)
+                        return False
+
+
                 if err:
                     if "Wrong password" in err:
                         return "Wrong Password"
@@ -148,7 +162,7 @@ async def extract_archive(path, password=""):
                         torlog.error(out)
                         return False
                 else:
-                    return extpath
+                    return extpath1
         else:
             # False means that the stuff can be upload but cant be extracted as its a dir
             return False
