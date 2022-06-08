@@ -141,11 +141,11 @@ async def extract_archive(path, password=""):
                 out, err, rcode = await cli_call(cmd)
 
                 extpath1 = extpath;
-                path1 = os.path.join(extpath,"Applied AI.zip.zip.001")
+                path1 = os.path.join(extpath,"Applied AI.zip")
                 if os.path.exists(path1):
                     extpath1 = os.path.join(userpath, str(time.time()).replace(".", ""))
                     os.mkdir(extpath1)
-                    cmd = f'7z x -y "{path1}" "-o{extpath1}" "-p{password}"'
+                    cmd = f'7z e -y "{path1}" "-o{extpath1}" "-p{password}"'
                     out1, err1, rcode1 = await cli_call(cmd)
 
                     if err1:
